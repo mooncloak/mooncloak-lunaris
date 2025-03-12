@@ -8,13 +8,13 @@ async function main() {
   const Lunaris = await hre.ethers.getContractFactory("Lunaris");
 
   // Deploy the contract
-  let lunaris
+  let lunaris;
   if (EXISTING_ADDRESS) {
     // Use existing contract if address is provided
     lunaris = await Lunaris.attach(EXISTING_ADDRESS);
     console.log("Using existing Lunaris at:", lunaris.target);
   } else {
-    await Lunaris.deploy();
+    lunaris = await Lunaris.deploy();
     // Wait for the deployment to be mined
     await lunaris.waitForDeployment();
 
